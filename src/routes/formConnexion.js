@@ -2,18 +2,18 @@ const path = require('path');
 const express = require('express');
 const router = express.Router();
 
-const LOGIN = "user"
+const FormConnexion = "user"
 const PASSWORD = "user"
 
-router.get('/login', (req, res, next) => {
+router.get('/connexion', (req, res, next) => {
     //on redirige le user vers la page d'accueil s'il est déjà connecté
     if (req.session.isLogin)
         res.redirect("/");
     else
-        res.render(path.join(__dirname, "..", "views","formLogin.ejs"), {pageTitle: "Connexion", errorMessage: null, isUserLogin: false});
+        res.render(path.join(__dirname, "..", "views","formConnexion.ejs"), {pageTitle: "Connexion", errorMessage: null, isUserLogin: false});
 });
 
-router.post('/formLogin', (req, res, next) => {
+router.post('/formConnexion', (req, res, next) => {
     //on récupère la valeur des 2 champs
     let errorMessage = null
     const resForm = Object.assign({},req.body);
@@ -32,7 +32,7 @@ router.post('/formLogin', (req, res, next) => {
             if (!regex.test(loginForm) && !regex.test(loginPassword)) {
 
                 //on vérifie que le login et le password sont corrects
-                if (LOGIN === loginForm && PASSWORD === loginPassword) {
+                if (FormConnexion === loginForm && PASSWORD === loginPassword) {
                     //l'utilisateur peut se connecter
                     req.session.isLogin = true
                     req.session.username = loginForm
@@ -40,7 +40,7 @@ router.post('/formLogin', (req, res, next) => {
                     res.redirect("/");
                 } else {
                     errorMessage = "Login/Mot de passe incorrect"
-                    res.render(path.join(__dirname, "..", "views", "formLogin.ejs"), {
+                    res.render(path.join(__dirname, "..", "views", "formConnexion.ejs"), {
                         pageTitle: "Connexion",
                         errorMessage: errorMessage,
                         isUserLogin: false
@@ -48,23 +48,23 @@ router.post('/formLogin', (req, res, next) => {
                 }
             }else{
                 errorMessage = "L'id/mdp de doivent pas contenir de caractères spéciaux";
-                res.render(path.join(__dirname, "..", "views", "formLogin.ejs"), {
+                res.render(path.join(__dirname, "..", "views", "formConnexion.ejs"), {
                     pageTitle: "Connexion",
                     errorMessage: errorMessage,
                     isUserLogin: false
                 });
-                res.render(path.join(__dirname, "..", "views","formLogin.ejs"), {pageTitle: "Connexion", errorMessage : errorMessage, isUserLogin: false});
+                res.render(path.join(__dirname, "..", "views","formConnexion.ejs"), {pageTitle: "Connexion", errorMessage : errorMessage, isUserLogin: false});
             }
 
         }
         else{
             errorMessage = "10 caractères au maximum!"
-            res.render(path.join(__dirname, "..", "views","formLogin.ejs"), {pageTitle: "Connexion", errorMessage : errorMessage, isUserLogin: false});
+            res.render(path.join(__dirname, "..", "views","formConnexion.ejs"), {pageTitle: "Connexion", errorMessage : errorMessage, isUserLogin: false});
         }
     }
     else{
         errorMessage = "Les champs doivent être remplis!"
-        res.render(path.join(__dirname, "..", "views","formLogin.ejs"), {pageTitle: "Connexion", errorMessage : errorMessage, isUserLogin: false});
+        res.render(path.join(__dirname, "..", "views","formConnexion.ejs"), {pageTitle: "Connexion", errorMessage : errorMessage, isUserLogin: false});
     }
 });
 function preg_quote(str,delimiter){

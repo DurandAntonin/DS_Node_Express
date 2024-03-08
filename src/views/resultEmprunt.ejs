@@ -5,31 +5,31 @@
 <main>
     <h2>Page de résultat des calculs des mensualités pour emprunt</h2>
 
+    <table>
+        <thead>
+        <tr>
+            <th>Montant de l'emprunt (€)</th>
+            <th>Taux (%)</th>
+            <th>Durée de l'emprunt (en années)</th>
+            <th>Mensualité</th>
+        </tr>
+        </thead>
     <% if (tabResultCalculEmprunts){ %>
         <% if (tabResultCalculEmprunts.length > 0){ %>
-            <table>
-                <thead>
+            <tbody>
+                <% for (let emprunt of tabResultCalculEmprunts){ %>
                     <tr>
-                        <th>Capital (€)</th>
-                        <th>Taux (%)</th>
-                        <th>Durée (en années)</th>
-                        <th>Mensualité</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <% for (let emprunt of tabResultCalculEmprunts){ %>
-                        <tr>
-                            <td> <%= emprunt.capital %> </td>
+                        <td> <%= emprunt.capital %> </td>
                             <td> <%= emprunt.taux %> </td>
                             <td> <%= emprunt.duree %> </td>
                             <td> <%= emprunt.mensualite %> </td>
-                        </tr>
+                    </tr>
                     <% } %>
-                </tbody>
-            </table>
+            </tbody>
         <% } %>
     <% } %>
+    </table>
+
 </main>
 
 <%- include('layout/fin.ejs') %>
