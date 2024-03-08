@@ -24,7 +24,7 @@ Notre projet permet aux utilisateurs de calculer le montant de mensualité d'un 
 
 Pour ce faire, ils devront se connecté, donnant accès à la page de calcul. Chaque nouveau calcul seront stocké temporairement, afin de leur laisser la possibilité de visualité leurs anciens calculs.
 
-<h2> Présentation des différente page de notre application web </h2>
+Présentation des différente page de notre application web
 
 <h3> Page d'accueil </h3>
 
@@ -52,5 +52,9 @@ Détruit la session de l'utilisateur et le redirige vers la page d'acceuil.
 
 <h3 id="explication1"> Système de connexion dans l'application </h3>
 
-<h3 id="explication2">  Système de stockage des mensualités pour l'emprunt </h3>
+<h3 id="explication2"> Système de stockage des mensualités pour l'emprunt </h3>
 
+Le fichier formEmprunt.js récupère les données entrée de l'utilisateur, après vérification des données appel le module emprunt.js pour effectuer le calcul des 
+mensualité pour emprunt.
+Le résultat est stocké dans une variable "tabResultCalculEmprunts" qui sera exporté. L'utilisateur est redirigé vers resultEmprunt.ejs.
+Le fichier resultEmprunt.js récupère la variable tabResultCalculEmprunts pour afficher toute les données qui y sont stocké.
