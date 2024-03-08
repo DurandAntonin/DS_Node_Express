@@ -17,6 +17,9 @@
 
         <button type="submit">OK</button>
     </form>
+    <% if (errorMessage != null){ %>
+        <p class="error"> <%= errorMessage %> </p>
+    <% } %>
 </main>
 
 <%- include("layout/fin.ejs") %>
