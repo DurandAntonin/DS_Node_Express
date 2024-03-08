@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const router = express.Router();
+const mysqlConnector = require('./../modules/mysqlConnector')
 
 const FormConnexion = "user"
 const PASSWORD = "user"
@@ -22,7 +23,7 @@ router.get('/connexion', (req, res, next) => {
     }
 });
 
-router.post('/formConnexion', (req, res, next) => {
+router.post('/formConnexion', async(req, res, next) => {
     //on récupère la valeur des 2 champs
     let errorMessage = null
     const resForm = Object.assign({},req.body);
@@ -33,10 +34,11 @@ router.post('/formConnexion', (req, res, next) => {
 
     //on initialise les variables session
     req.session.isLogin = false
-    req.session.username = loginForm
+    req.session.username = null
     req.session.tabResultCalculEmprunts = []
     req.session.lastErrorMessageFormCalculEmprunt = null
     req.session.lastErrorMessageFormConnexion = null
+    req.session.lastErrorMessageFormInscription = null
 
     //on vérifie la validité des champs
     if (loginForm.length > 0  && loginPassword.length > 0){
@@ -46,14 +48,25 @@ router.post('/formConnexion', (req, res, next) => {
 
             const regex = new RegExp('[' + blacklistChars.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&") + ']');
             if (!regex.test(loginForm) && !regex.test(loginPassword)) {
+                let resultRequestGetUser = null
 
-                //on vérifie que le login et le password sont corrects
-                if (FormConnexion === loginForm && PASSWORD === loginPassword) {
-                    //l'utilisateur peut se connecter
-                    req.session.isLogin = true
+                //on exécute une requete sql pour vérifier si le couple (login, password) existe
+                await mysqlConnector.execute("select id from Users where login = ? and password = ?",[loginForm, loginPassword])
+                    .then(result => {
+                        resultRequestGetUser = result[0]
+                    }).catch(err => {
+                        req.session.lastErrorMessageFormConnexion = err
+                });
 
-                } else
-                    req.session.lastErrorMessageFormConnexion = "Login/Mot de passe incorrect"
+                if (req.session.lastErrorMessageFormConnexion == null){
+                    if (resultRequestGetUser.length === 1) {
+                        //l'utilisateur peut se connecter
+                        req.session.isLogin = true
+                        req.session.username = loginForm
+
+                    } else
+                        req.session.lastErrorMessageFormConnexion = "Login/Mot de passe incorrect"
+                }
             }else
                 req.session.lastErrorMessageFormConnexion = "L'id/mdp de doivent pas contenir de caractères spéciaux";
         }
