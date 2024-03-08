@@ -16,7 +16,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname,'public')));
 
 app.use((req,res,next)=>{;
-    //res.status(404).render(path.join(__dirname,"views","404.ejs"), {pageTitle: "404 not Found"});
+    res.status(404).render(path.join(__dirname,"views","404.ejs"), {pageTitle: "404 not Found"});
 });
 
 app.listen(port);
