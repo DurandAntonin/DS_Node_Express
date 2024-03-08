@@ -8,7 +8,8 @@ const port=8000;
 const app = express();
 
     // Importe les routes
-const loginRoutes = require('./routes/formConnexion');
+const connexionRoutes = require('./routes/formConnexion');
+const inscriptionRoutes = require('./routes/formInscription');
 const defaultRoutes = require('./routes/defaut');
 const deconnexionRoutes = require('./routes/deconnexion');
 const formEmpruntRoutes = require('./routes/formCalculEmprunt');
@@ -26,7 +27,8 @@ app.use(express.static(path.join(__dirname,'public')));
 
 // Utilise les routes
 app.use(defaultRoutes);
-app.use(loginRoutes);
+app.use(connexionRoutes);
+app.use(inscriptionRoutes);
 app.use(deconnexionRoutes);
 app.use(formEmpruntRoutes);
 app.use(resultEmpruntRoutes);
