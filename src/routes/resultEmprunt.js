@@ -4,22 +4,34 @@ const router = express.Router();
 
 const listestock = require('./formEmprunt');
 
-router.get('/result', (req, res, next) => {
-    //on regarde si un user est connecté
-    let username = null;
-    let userConnected = false;
+router.get('/resultEmprunt', (req, res, next) => {
+    console.log("stock : ", listestock.tabCalculEmprunts);
 
     //console.log("defaut : " + req.session)
     //console.log(req.session)
+
+    //on regarde si un user est connecté
     if (req.session.isLogin) {
-        username = req.session.username
-        userConnected = true
-        res.render(path.join(__dirname, "..", "views", "resultEmprunt.ejs"), {
-            pageTitle: "Resultat des emprunts",
-            isUserLogin: req.session.isLogin
-        });
-    } else {
-        res.redirect('/');
+        if (listestock.tabCalculEmprunts) {
+            const liste = listestock.tabCalculEmprunts;
+
+            if (liste.length > 0) {
+                let value;
+                for (const elt of liste) {
+                    value = elt.message;
+                    console.log("value : ", elt.message);
+                }
+            }
+
+            res.render(path.join(__dirname, "..", "views", "resultEmprunt.ejs"), {
+                message: liste,
+                pageTitle: "Resultat des emprunts",
+                isUserLogin: req.session.isLogin
+
+            });
+        } else {
+            res.redirect('/');
+        }
     }
 });
 

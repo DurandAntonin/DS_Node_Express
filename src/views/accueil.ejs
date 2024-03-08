@@ -6,13 +6,13 @@
 <main>
     <h2>Page d'accueil</h2>
 
-    Bonjour
+    <p>Bonjour
     <%
     if (isUserLogin === true){ %>
         <%= user.username + ", " %>
     <%}
     %>
-    vous voici sur la page d'accueil
+        vous voici sur la page d'accueil</p>
 </main>
 
 <%- include('layout/fin.ejs') %>
