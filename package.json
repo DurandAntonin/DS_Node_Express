@@ -1,0 +1,25 @@
+{
+  "name": "ds_node_express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DurandAntonin/DS_Node_Express.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DurandAntonin/DS_Node_Express/issues"
+  },
+  "homepage": "https://github.com/DurandAntonin/DS_Node_Express#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.3",
+    "express-session": "^1.18.0",
+    "path": "^0.12.7"
+  }
+}
