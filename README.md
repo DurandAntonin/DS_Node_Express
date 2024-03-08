@@ -49,6 +49,86 @@ Dans le cas contraire, l'utilisateur reste sur la page de calcul avec un message
 Détruit la session de l'utilisateur et le redirige vers la page d'acceuil.
 
 <h2 style="color:#5d79e7; page-break-before: always" id="installationApplication"> Installation de l'application </h2>
+<h3>Installation</h3>
+Pour installer tout les packages, il suffit de faire :
+
+````bash
+npm install
+````
+Cette commande permettra d'installer tout les packages se trouvant dans le fichier package.json.
+
+
+<h3>Package</h3>
+<li style="font-size:15px">path</li>
+Permet de manipuler les chemins de fichier et de répertoire :
+
+````nodejs
+path.join(__dirname,"views","404.ejs")
+````
+views : Un dossier <br>
+404.ejs : Un fichier <br>
+__dirname : Répertoire du fichier
+<br><br>
+Avantage :
+<br> Simplifie les redirections et la portabilité.
+<br> Manipuler les chemins d'accès en sécurité et évite les injections.
+
+<li style="font-size:15px">express</li>
+Est un framework web qui permet de simplifier la gestion des routes, des requêtes, ... :
+
+````nodejs
+const express = require('express'); // importe express
+const app = express();  // variable d'utilisation
+app.listen(port); // Port du lancement (localhost)
+app.use(formEmpruntRoutes); //Ulilise les routes
+````
+
+Avantage : 
+<br> Facilite l'utilisation.
+<br> Offre une architecture simple.
+<br> Il est flexible et peut être utilisé dans la plus part des applications web.
+<br> Permet de haute performance.
+<br> Peut être intégré avec d'autre technologies (ex : MongoDB).
+
+<li style="font-size:15px">body-parser</li>
+Permet d'analyser les requêtes pour qu'elles soient utilisé par l'application.
+<br>Il extrait la requête HTTP et la transforme en Json.
+
+````nodejs
+const bodyParser = require('body-parser'); // importe bodyparser
+app.use(bodyParser.urlencoded({ extended: false })); // On utilise le Middleware
+````
+Avantage :
+<br> Facile d'utilisation et de configuration
+<br> Facilite la manipulation des données des requêtes car elle transforme en json.
+<br> Permet de limiter la taille des données.
+
+<li style="font-size:15px">express-session</li>
+Le package permet de gérer les sessions des utilisateurs.
+<br> Cela permet de se souvenir des utilisateurs et ainsi stocker les données qu'il lui correspondent.
+
+
+````nodejs
+const session = require("express-session") // importe express-session
+app.use(session({secret : "un secret", resave: false, saveUninitialized: false})); // On utilise express-session et on lui passe des options
+````
+
+Avantage : 
+<br> Utilisation de clé secrète pour les sessions, ce qui empêche les attaques de requête.
+<br> On peut avoir la main sur plein d'option comme la durée d'une session.
+
+<li style="font-size:15px">ejs</li>
+Ejs est associé à la vue dans une application NodeJS. Elle remplace le HTML
+
+````nodejs
+const session = require("express-session") // importe express-session
+app.use(session({secret : "un secret", resave: false, saveUninitialized: false})); // On utilise express-session et on lui passe des options
+````
+
+Avantage :
+<br> Permet d'inclure des données de d'autres pages dans un template HTML (comme PHP). Ca a un coté back-end fait pour le front-end pour la gestion des données.
+<br> Intègre du Javascript dans du HTML.
+
 
 <h2 style="color:#5d79e7; page-break-before: always" id="explicationExtraitsCode"> Explication de deux extraits de code </h2>
 
