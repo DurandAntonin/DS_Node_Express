@@ -29,9 +29,10 @@ router.get('/resultEmprunt', (req, res, next) => {
                 isUserLogin: req.session.isLogin
 
             });
-        } else {
-            res.redirect('/');
         }
+    }
+    else {
+        res.redirect('/');
     }
 });
 
