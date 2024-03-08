@@ -24,18 +24,35 @@ router.post('/formLogin', (req, res, next) => {
 
     //on vérifie la validité des champs
     if (loginForm.length > 0  && loginPassword.length > 0){
-        if (loginForm.length < 10 && loginPassword.length < 10){
+        if (loginForm.length < 10 && loginPassword.length < 10) {
 
-            //on vérifie que le login et le password sont corrects
-            if (LOGIN === loginForm && PASSWORD === PASSWORD){
-                //l'utilisateur peut se connecter
-                req.session.isLogin = true
-                req.session.username = loginForm
-                console.log(req.session)
-                res.redirect("/");
-            }
-            else{
-                errorMessage = "Login/Mot de passe incorrect"
+            const blacklistChars = '"%\'*;<>?^`{|}~/\\#=&';
+
+            const regex = new RegExp('[' + blacklistChars.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&") + ']');
+            if (!regex.test(loginForm) && !regex.test(loginPassword)) {
+
+                //on vérifie que le login et le password sont corrects
+                if (LOGIN === loginForm && PASSWORD === loginPassword) {
+                    //l'utilisateur peut se connecter
+                    req.session.isLogin = true
+                    req.session.username = loginForm
+                    console.log(req.session)
+                    res.redirect("/");
+                } else {
+                    errorMessage = "Login/Mot de passe incorrect"
+                    res.render(path.join(__dirname, "..", "views", "formLogin.ejs"), {
+                        pageTitle: "Connexion",
+                        errorMessage: errorMessage,
+                        isUserLogin: false
+                    });
+                }
+            }else{
+                errorMessage = "L'id/mdp de doivent pas contenir de caractères spéciaux";
+                res.render(path.join(__dirname, "..", "views", "formLogin.ejs"), {
+                    pageTitle: "Connexion",
+                    errorMessage: errorMessage,
+                    isUserLogin: false
+                });
                 res.render(path.join(__dirname, "..", "views","formLogin.ejs"), {pageTitle: "Connexion", errorMessage : errorMessage, isUserLogin: false});
             }
 
@@ -50,5 +67,7 @@ router.post('/formLogin', (req, res, next) => {
         res.render(path.join(__dirname, "..", "views","formLogin.ejs"), {pageTitle: "Connexion", errorMessage : errorMessage, isUserLogin: false});
     }
 });
-
+function preg_quote(str,delimiter){
+    return (str + '').replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\' + (delimiter || '') + '-]', 'g'), '\\$&');
+}
 module.exports = router
