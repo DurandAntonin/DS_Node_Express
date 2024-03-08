@@ -20,9 +20,9 @@ _Araujo Alexis_ <br>
 
 <h2 style="color:#5d79e7; page-break-before: always" id="introduction"> Introduction </h2>
 
-Notre projet permet aux utilisateurs de calculer le montant de mensualité d'un emprunt celon trois carractéristiques qu'ils entreront, le capital, le taux et le temps de l'emprunt.
+Notre projet permet aux utilisateurs de calculer le montant de mensualité d'un emprunt selon trois caractéristiques qu'ils entreront, le capital, le taux et le temps de l'emprunt.
 
-Pour ce faire, ils devront se connecté, donnant accès à la page de calcul. Chaque nouveau calcul seront stocké temporairement, afin de leur laisser la possibilité de visualité leurs anciens calculs.
+Pour ce faire, ils devront se connecter, donnant accès à la page de calcul. Chaque nouveau calcul sera stocké temporairement, afin de leur laisser la possibilité de visualité leurs anciens calculs.
 
 Présentation des différente page de notre application web
 
@@ -31,9 +31,11 @@ Présentation des différente page de notre application web
 Présente une barre de navigation, redirigeant vers la page de connection ou de calcul (si connecté).
 Lorsqu'il est connecté, un message personnalisé est affiché.
 
+
 <h3>Page de connection </h3>
 
-Présente un formulaire avec deux input (login et mdp). Une fois l'envoie des données une fois la vérification des données s'impose pour empêcher les requêtes forcées.
+Présente un formulaire avec deux input (login et mdp). 
+Une fois l'envoie des données une fois la vérification des données s'impose pour empêcher les requêtes forcées.
 Un seul login est présent et est écrit en durs.
 
 <h3>Page de calcul </h3>
@@ -54,7 +56,7 @@ Détruit la session de l'utilisateur et le redirige vers la page d'acceuil.
 
 <h3 id="explication2"> Système de stockage des mensualités pour l'emprunt </h3>
 
-Le fichier formEmprunt.js récupère les données entrée de l'utilisateur, après vérification des données appel le module emprunt.js pour effectuer le calcul des 
+Le fichier formEmprunt.js récupère les données entrée de l'utilisateur, après vérification des données appel le module emprunt.js pour effectuer le calcul des
 mensualité pour emprunt.
 Le résultat est stocké dans une variable "tabResultCalculEmprunts" qui sera exporté. L'utilisateur est redirigé vers resultEmprunt.ejs.
 Le fichier resultEmprunt.js récupère la variable tabResultCalculEmprunts pour afficher toute les données qui y sont stocké.
