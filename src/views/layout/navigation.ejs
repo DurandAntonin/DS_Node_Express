@@ -1,13 +1,17 @@
 <body>
 <header>
-    <h1>Application</h1>
+    <div id="divTitre">
+        <img src="images/logoApplication.png" alt="Logo de l'application">
+        <h1 >MensulCalc</h1>
+    </div>
+
     <nav>
         <ul>
             <li><a href="/">Accueil</a></li>
-            <li><a href="/formEmprunt">Calul emprunt</a></li>
+            <li><a href="/formEmprunt">Calcul emprunt</a></li>
             <%
                 if (isUserLogin === true) { %>
-                    <li><a href="/resultEmprunt">Mensualités des emprunts</a></li>
+                    <li><a href="/resultEmprunt">Historique de calculs des emprunts</a></li>
                     <li><a href="/deconnexion">Déconnexion</a></li>
                 <%}
                 else{%>

@@ -52,8 +52,6 @@ router.post('/formConnexion', (req, res, next) => {
                     //l'utilisateur peut se connecter
                     req.session.isLogin = true
 
-                    //console.log(req.session)
-                    res.redirect("/");
                 } else
                     req.session.lastErrorMessageFormConnexion = "Login/Mot de passe incorrect"
             }else
