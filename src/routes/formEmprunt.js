@@ -28,6 +28,7 @@ router.post('/formEmprunt', (req, res, next) => {
     if (!isNaN(capital) && !isNaN(taux) && !isNaN(duree)) {
         //on calcule les mensualités de l'emprunt
         let mensualite = emprunt(capital, taux, duree)
+        mensualite = mensualite.toFixed(2);
         //on stocke les données de calcul et le résultat dans le tableau
         tabResultCalculEmprunts.push({capital: capital, taux: taux, duree: duree, mensualite: mensualite})
         //console.log(tabResultCalculEmprunts);
