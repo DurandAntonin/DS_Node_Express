@@ -120,11 +120,6 @@ Avantage :
 <li style="font-size:15px">ejs</li>
 Ejs est associé à la vue dans une application NodeJS. Elle remplace le HTML
 
-````nodejs
-const session = require("express-session") // importe express-session
-app.use(session({secret : "un secret", resave: false, saveUninitialized: false})); // On utilise express-session et on lui passe des options
-````
-
 Avantage :
 <br> Permet d'inclure des données de d'autres pages dans un template HTML (comme PHP). Ca a un coté back-end fait pour le front-end pour la gestion des données.
 <br> Intègre du Javascript dans du HTML.
