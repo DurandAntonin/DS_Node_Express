@@ -1,17 +1,18 @@
+<body>
 <header>
     <h1>Application</h1>
     <nav>
         <ul>
             <li><a href="/">Accueil</a></li>
             <li><a href="/formEmprunt">Calul emprunt</a></li>
-            <li><a href="/resultEmprunt">Résultats calcul</a></li>
-
             <%
                 if (isUserLogin === true) { %>
+                    <li><a href="/resultEmprunt">Mensualités des emprunts</a></li>
                     <li><a href="/deconnexion">Déconnexion</a></li>
                 <%}
                 else{%>
                     <li><a href="/login">Authentification</a></li>
+                    <li><a href="/inscription">Inscription</a></li>
                 <%}
 
             %>

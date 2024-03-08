@@ -17,7 +17,7 @@ router.get('/formEmprunt', (req, res, next) => {
 
 // Définit une route pour traiter les données du formulaire envoyé en POST.
 router.post('/formEmprunt', (req, res, next) => {
-    console.log(Object.assign({},req.body));
+    //console.log(Object.assign({},req.body));
     //on récupère les valeurs pour le calcul de l'emprunt
     let capital = req.body.capital
     let taux = req.body.taux
@@ -28,8 +28,8 @@ router.post('/formEmprunt', (req, res, next) => {
 
     //on stocke les données de calcul et le résultat dans le tableau
     tabResultCalculEmprunts.push({capital: capital, taux: taux, duree: duree, mensualite: mensualite})
-    console.log(tabResultCalculEmprunts);
-    res.redirect('/formEmprunt');
+    //console.log(tabResultCalculEmprunts);
+    res.redirect('/resultEmprunt');
 });
 
 module.exports = router;

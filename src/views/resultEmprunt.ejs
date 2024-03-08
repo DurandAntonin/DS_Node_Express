@@ -1,13 +1,35 @@
 <%- include('layout/debut.ejs') %>
 
-<body>
 <%- include('layout/navigation.ejs') %>
 
 <main>
-    <h2>Page de Résultat de l'emprunt</h2>
+    <h2>Page de résultat des calculs des mensualités pour emprunt</h2>
 
-    vous voici sur la page du résultat de l'emprunt
+    <% if (tabResultCalculEmprunts){ %>
+        <% if (tabResultCalculEmprunts.length > 0){ %>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Capital (€)</th>
+                        <th>Taux (%)</th>
+                        <th>Durée (en années)</th>
+                        <th>Mensualité</th>
+                    </tr>
+                </thead>
 
+                <tbody>
+                    <% for (let emprunt of tabResultCalculEmprunts){ %>
+                        <tr>
+                            <td> <%= emprunt.capital %> </td>
+                            <td> <%= emprunt.taux %> </td>
+                            <td> <%= emprunt.duree %> </td>
+                            <td> <%= emprunt.mensualite %> </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        <% } %>
+    <% } %>
 </main>
 
 <%- include('layout/fin.ejs') %>
