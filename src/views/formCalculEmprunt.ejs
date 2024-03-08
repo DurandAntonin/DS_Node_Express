@@ -1,0 +1,22 @@
+<%- include("layout/debut.ejs") %>
+
+<%- include("layout/navigation.ejs") %>
+
+<main>
+    <h2>Formulaire de calcul des mensualités pour emprunt</h2>
+
+    <form action="formEmprunt" name="form_emprunt" method="post">
+        <label for="capital">Capital</label>
+        <input type="number" id="capital" name="capital">
+
+        <label for="taux">Taux (%)</label>
+        <input type="number" id="taux" name="taux" step="0.01">
+
+        <label for="duree">Duree (en année)</label>
+        <input type="number" id="duree" name="duree">
+
+        <button type="submit">OK</button>
+    </form>
+</main>
+
+<%- include("layout/fin.ejs") %>

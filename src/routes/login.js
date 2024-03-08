@@ -10,10 +10,10 @@ router.get('/login', (req, res, next) => {
     if (req.session.isLogin)
         res.redirect("/");
     else
-        res.render(path.join(__dirname, "..", "views","login.ejs"), {pageTitle: "Connexion", "errorMessage" : null, errorMessage: null, isUserLogin: false});
+        res.render(path.join(__dirname, "..", "views","formLogin.ejs"), {pageTitle: "Connexion", errorMessage: null, isUserLogin: false});
 });
 
-router.post('/login', (req, res, next) => {
+router.post('/formLogin', (req, res, next) => {
     //on récupère la valeur des 2 champs
     let errorMessage = null
     const resForm = Object.assign({},req.body);
@@ -36,18 +36,18 @@ router.post('/login', (req, res, next) => {
             }
             else{
                 errorMessage = "Login/Mot de passe incorrect"
-                res.render(path.join(__dirname, "..", "views","login.ejs"), {pageTitle: "Connexion", errorMessage : errorMessage, isUserLogin: false});
+                res.render(path.join(__dirname, "..", "views","formLogin.ejs"), {pageTitle: "Connexion", errorMessage : errorMessage, isUserLogin: false});
             }
 
         }
         else{
             errorMessage = "10 caractères au maximum!"
-            res.render(path.join(__dirname, "..", "views","login.ejs"), {pageTitle: "Connexion", errorMessage : errorMessage, isUserLogin: false});
+            res.render(path.join(__dirname, "..", "views","formLogin.ejs"), {pageTitle: "Connexion", errorMessage : errorMessage, isUserLogin: false});
         }
     }
     else{
         errorMessage = "Les champs doivent être remplis!"
-        res.render(path.join(__dirname, "..", "views","login.ejs"), {pageTitle: "Connexion", errorMessage : errorMessage, isUserLogin: false});
+        res.render(path.join(__dirname, "..", "views","formLogin.ejs"), {pageTitle: "Connexion", errorMessage : errorMessage, isUserLogin: false});
     }
 });
 

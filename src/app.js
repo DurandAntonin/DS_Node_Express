@@ -9,6 +9,8 @@ const app = express();
 const loginRoutes = require('./routes/login');
 const defaultRoutes = require('./routes/defaut')
 const deconnexionRoutes = require('./routes/deconnexion')
+const formEmpruntRoutes = require('./routes/formEmprunt')
+const resultEmpruntRoutes = require('./routes/resultEmprunt')
 
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'))
@@ -22,6 +24,8 @@ app.use(express.static(path.join(__dirname,'public')));
 app.use(defaultRoutes)
 app.use(loginRoutes)
 app.use(deconnexionRoutes)
+app.use(formEmpruntRoutes)
+app.use(resultEmpruntRoutes)
 
 app.use((req,res,next)=>{
     let username = null;
