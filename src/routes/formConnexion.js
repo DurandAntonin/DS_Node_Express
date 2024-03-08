@@ -6,11 +6,20 @@ const FormConnexion = "user"
 const PASSWORD = "user"
 
 router.get('/connexion', (req, res, next) => {
-    //on redirige le user vers la page d'accueil s'il est déjà connecté
-    if (req.session.isLogin)
+    let errorMessage = ""
+
+    //on redirige le user vers la page d'accueil s'il est déjà connecté et on affiche les éventuels messages d'erreur
+    if (req.session.isLogin){
         res.redirect("/");
-    else
-        res.render(path.join(__dirname, "..", "views","formConnexion.ejs"), {pageTitle: "Connexion", errorMessage: null, isUserLogin: false});
+    }
+    else{
+        if (req.session.lastErrorMessageFormConnexion != null){
+            errorMessage = req.session.lastErrorMessageFormConnexion
+            req.session.lastErrorMessageFormConnexion = null
+        }
+
+        res.render(path.join(__dirname, "..", "views","formConnexion.ejs"), {pageTitle: "Connexion", errorMessage: errorMessage, isUserLogin: req.session.isLogin});
+    }
 });
 
 router.post('/formConnexion', (req, res, next) => {
@@ -21,6 +30,13 @@ router.post('/formConnexion', (req, res, next) => {
     const loginForm = resForm.login
     const loginPassword = resForm.password
     //console.log(loginPassword.length)
+
+    //on initialise les variables session
+    req.session.isLogin = false
+    req.session.username = loginForm
+    req.session.tabResultCalculEmprunts = []
+    req.session.lastErrorMessageFormCalculEmprunt = null
+    req.session.lastErrorMessageFormConnexion = null
 
     //on vérifie la validité des champs
     if (loginForm.length > 0  && loginPassword.length > 0){
@@ -35,37 +51,21 @@ router.post('/formConnexion', (req, res, next) => {
                 if (FormConnexion === loginForm && PASSWORD === loginPassword) {
                     //l'utilisateur peut se connecter
                     req.session.isLogin = true
-                    req.session.username = loginForm
-                    console.log(req.session)
-                    res.redirect("/");
-                } else {
-                    errorMessage = "Login/Mot de passe incorrect"
-                    res.render(path.join(__dirname, "..", "views", "formConnexion.ejs"), {
-                        pageTitle: "Connexion",
-                        errorMessage: errorMessage,
-                        isUserLogin: false
-                    });
-                }
-            }else{
-                errorMessage = "L'id/mdp de doivent pas contenir de caractères spéciaux";
-                res.render(path.join(__dirname, "..", "views", "formConnexion.ejs"), {
-                    pageTitle: "Connexion",
-                    errorMessage: errorMessage,
-                    isUserLogin: false
-                });
-                res.render(path.join(__dirname, "..", "views","formConnexion.ejs"), {pageTitle: "Connexion", errorMessage : errorMessage, isUserLogin: false});
-            }
 
+                    //console.log(req.session)
+                    res.redirect("/");
+                } else
+                    req.session.lastErrorMessageFormConnexion = "Login/Mot de passe incorrect"
+            }else
+                req.session.lastErrorMessageFormConnexion = "L'id/mdp de doivent pas contenir de caractères spéciaux";
         }
-        else{
-            errorMessage = "10 caractères au maximum!"
-            res.render(path.join(__dirname, "..", "views","formConnexion.ejs"), {pageTitle: "Connexion", errorMessage : errorMessage, isUserLogin: false});
-        }
+        else
+            req.session.lastErrorMessageFormConnexion = "10 caractères au maximum!"
     }
-    else{
-        errorMessage = "Les champs doivent être remplis!"
-        res.render(path.join(__dirname, "..", "views","formConnexion.ejs"), {pageTitle: "Connexion", errorMessage : errorMessage, isUserLogin: false});
-    }
+    else
+        req.session.lastErrorMessageFormConnexion = "Les champs doivent être remplis!"
+
+    res.redirect("/connexion")
 });
 function preg_quote(str,delimiter){
     return (str + '').replace(new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\' + (delimiter || '') + '-]', 'g'), '\\$&');

@@ -35,8 +35,6 @@ app.use((req,res,next)=>{
     let username = null;
     let userConnected = false;
 
-    console.log("defaut : " + req.session)
-    console.log(req.session)
     if (req.session.isLogin)
         username = req.session.username
 
