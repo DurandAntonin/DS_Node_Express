@@ -4,7 +4,16 @@
         <ul>
             <li><a href="/">Accueil</a></li>
             <li><a href="/form">Calul emprunt</a></li>
-            <li><a href="/login">Authentification</a></li>
+
+            <%
+                if (isUserLogin === true) { %>
+                    <li><a href="/deconnexion">Déconnexion</a></li>
+                <%}
+                else{%>
+                    <li><a href="/login">Authentification</a></li>
+                <%}
+
+            %>
         </ul>
     </nav>
 </header>

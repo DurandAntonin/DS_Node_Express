@@ -1,0 +1,23 @@
+<%- include("layout/debut.ejs") %>
+
+<%- include("layout/navigation.ejs") %>
+
+<main>
+    <form action="login" name="formLogin" method="post">
+        <h2>Authentification</h2>
+
+        <label for="login">Login</label>
+        <input type="text" id="login" name="login">
+
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password">
+
+        <button type="submit">OK</button>
+
+        <% if (errorMessage != null){ %>
+            <p class="error"> <%= errorMessage %> </p>
+        <% } %>
+    </form>
+</main>
+
+<%- include("layout/fin.ejs") %>

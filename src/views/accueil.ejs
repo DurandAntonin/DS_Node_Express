@@ -1,0 +1,18 @@
+<%- include('layout/debut.ejs') %>
+
+<body>
+<%- include('layout/navigation.ejs') %>
+
+<main>
+    <h2>Page d'accueil</h2>
+
+    Bonjour
+    <%
+    if (isUserLogin === true){ %>
+        <%= user.username + ", " %>
+    <%}
+    %>
+    vous voici sur la page d'accueil
+</main>
+
+<%- include('layout/fin.ejs') %>
