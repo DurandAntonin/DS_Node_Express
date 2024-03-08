@@ -1,3 +1,4 @@
+// Import package
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -6,26 +7,29 @@ const session = require("express-session")
 const port=8000;
 const app = express();
 
+    // Importe les routes
 const loginRoutes = require('./routes/login');
-const defaultRoutes = require('./routes/defaut')
-const deconnexionRoutes = require('./routes/deconnexion')
-const formEmpruntRoutes = require('./routes/formEmprunt')
-const resultEmpruntRoutes = require('./routes/resultEmprunt')
+const defaultRoutes = require('./routes/defaut');
+const deconnexionRoutes = require('./routes/deconnexion');
+const formEmpruntRoutes = require('./routes/formEmprunt');
+const resultEmpruntRoutes = require('./routes/resultEmprunt');
 
-app.set('view engine', 'ejs')
-app.set('views', path.join(__dirname, 'views'))
+// PARTIE APP
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
-app.use(session({secret : "un secret", resave: false, saveUninitialized: false}))
+app.use(session({secret : "un secret", resave: false, saveUninitialized: false}));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.urlencoded({extended: false}));
 
 app.use(express.static(path.join(__dirname,'public')));
 
-app.use(defaultRoutes)
-app.use(loginRoutes)
-app.use(deconnexionRoutes)
-app.use(formEmpruntRoutes)
-app.use(resultEmpruntRoutes)
+// Utilise les routes
+app.use(defaultRoutes);
+app.use(loginRoutes);
+app.use(deconnexionRoutes);
+app.use(formEmpruntRoutes);
+app.use(resultEmpruntRoutes);
 
 app.use((req,res,next)=>{
     let username = null;
