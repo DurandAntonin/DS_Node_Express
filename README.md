@@ -48,6 +48,7 @@ Détruit la session de l'utilisateur et le redirige vers la page d'accueil.
 <h2 style="color:#5d79e7; page-break-before: always" id="installationApplication"> Installation de l'application </h2>
 
 <h3>Installation</h3>
+<li>Package</li>
 Pour installer tout les packages, il suffit de faire:
 
 ````bash
@@ -55,8 +56,27 @@ npm install
 ````
 Cette commande permettra d'installer tout les packages se trouvant dans le fichier package.json.
 
+<li>Base de données</li>
+Pour réaliser une connexion et une inscription, il faut importer la table dans la base de données, sinon une erreur apparaitra (object : object).
+<br> <img src="img/pageConnexion.png" width="300" alt="pageConnexion">
+<ol>
+<li>Première étape : lancer XAMPP control panel et start MYSQL ET APACHE</li>
+    <img src="img/xamppControl.png" width="400" alt="xamppControlPanel">
+<li>Deuxième étape : il faut se rendre sur l'url: localhost/phpmyadmin</li>
+    Il faut aller sur importer -> chosir un fichier -> sélectionner la base de données dans DS_Node_Express/src/sql.
+    <br> Vous vous retrouvez normalement avec une base de données, à gauche.
+    <br> <img src="img/importerBD.png" width="400" alt="importer Base de données">
+<li>Troisième étape (si erreur import de la table):</li>
+    Il faut se rendre dans le code de la création de la base de données. Le copier !
+    <br> <img src="img/codeBD.png" width="400" alt="code de création base de données">
+    <br> Il faut se rendre sur la base de données -> Sélectionnez SQl. Coller !
+    <br> <img src="img/importerTable.png" width="400" alt="importer Base de données">
+</ol>
+
+Et voilà ! Vous  pouvez maintenant lancer l'application et permettre de faire des inscriptions et des connexions.
+
 <h3>Lancement de l'application</h3>
-Une fois les différents packages installés, l'application peut être lancée sur le port 8000 via la commande suivante:
+Une fois les différents packages installés et la base de données importé, l'application peut être lancée sur le port 8000 via la commande suivante:
 
 ````bash
 npm start
